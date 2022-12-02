@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+}
+
+:root{
+    --tamanho-protudo: 10em;
+    --img-largura: 13em;
+}
+/*------------------- Parte superior -----------------------------*/
+header{
+    background: linear-gradient(90deg, rgba(142,45,226,1) 0%, rgba(74,0,224,1) 100%);
+    border-radius: 0px 0px 36px 36px;
+    margin-bottom: 50px;
+}
+nav{
+    display: flex;
+    justify-content: center;
+}
+.nav{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2px;
+}
+
+
+nav span{
+    color: #ffff;
+    font-size: 50px;
+    cursor: pointer;
+}
+
+nav span:active{
+    position: relative;
+    top: 1px;
+}
+
+#pesquisa{
+    height: 4.4em;
+    border-radius:  36px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+}
+
+
+#input_pesquisa{
+    position:relative;
+    border: none;
+	top:12px;
+    border-radius: 20px;
+    width: 86%;
+    height: 2.6em;
+    -webkit-box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23); 
+box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23);
+    outline: none;
+    text-align: center;
+    
+}
+
+#lupa{
+    position: relative;
+    top: 7.3px;
+    right: 30px;
+    cursor: pointer;
+}
+
+
+#oculto{
+    opacity: 0;
+}
+
+
+
+
+/*------------------- Partes dos produtos ----------------------------------*/
+
+section{
+    width: 95%;
+    display:flex;
+    flex-direction: row;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.produto{
+    background-color: rgb(235, 240, 233);
+    width: var(--img-largura);
+    border-radius: 8px;
+    margin-bottom: 3rem;
+    margin-right: 1px;
+    padding-top: 1.4px;
+    padding-bottom: 2px;
+    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    
+}
+
+img{
+    width: var(--img-largura);
+    height: var(--tamanho-protudo);
+    border-radius: 8px;
+}
+.produto:active {
+	position:relative;
+	top:3px;
+    left: 1px;
+}
+
+h2{
+    text-align: center;
+}
+
+span{
+    color: rgb(15, 228, 96);
+}
+
+.produto h3{
+    margin-top: 0.2em;
+    text-align: end;
+    margin-right: 0.4em;
+}
+
+.produtos{
+    display: flex;
+    justify-content: center;
+}
+
+header h3{
+    color: rgb(255, 255, 255);
+}
+
+/* -------------- Carrinho --------------------------------------- */
+
+#modalCarrinho span{
+    color: rgb(221, 14, 14);
+    cursor: pointer;
+}
+
+#footerCarrinho{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*-------------- Responsivo -----------------------------*/
+
+@media (max-width: 447px){
+    
+    .produtos{
+        
+        display: flex;
+        justify-content:center;
+       
+    }
+
+    section{
+        width: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+    }
+    
+}
