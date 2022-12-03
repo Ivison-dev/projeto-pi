@@ -7,17 +7,17 @@ let produtos = [
     {'nomeProduto': 'Laranga','imagem':'images/laranja.jpg','preco': 6.40},
     {'nomeProduto': 'Siriguela','imagem': 'images/sireguela.jpg','preco': 4.00},
 ]
-var buttonSair = document.getElementById('sair')
+// var buttonSair = document.getElementById('sair')
 const auth = getAuth()
 
-buttonSair.addEventListener('click', ()=>{
-    alert('oi')
-    signOut(auth).then(() => {
-        alert('Desconectado')
-      }).catch((error) => {
-        alert(error)
-      });
-})
+// buttonSair.addEventListener('click', ()=>{
+//     alert('oi')
+//     signOut(auth).then(() => {
+//         alert('Desconectado')
+//       }).catch((error) => {
+//         alert(error)
+//       });
+// })
 
 onAuthStateChanged(auth, (user) =>{
     if (user){
@@ -57,7 +57,6 @@ onAuthStateChanged(auth, (user) =>{
                         alert('Insira um item no carrinho')
                         return
                     }
-                    alert('Valor da compra: '+ this.carrinho.valorCompra)
                     if (this.usuario.pontosConhecimento < this.carrinho.valorCompra){
                         alert('Saldo insuficiente')
                         return
