@@ -71,6 +71,7 @@ export function validar_cadastro(){
         num = +1
     }
     else{
+        
         var i = document.getElementById('iconSenhaCadastro')
         i.style.color = '#4070f4'
         senha.style.borderBottomColor= '#4070f4'

@@ -10,7 +10,6 @@ var buttom2 = document.getElementById('submit')
 buttom1.addEventListener('click', ()=>{
        var validacao = validar_login()
        if(! validacao[0]){
-              alert('login')
               signInWithEmailAndPassword(auth, validacao[1], validacao[2]).then(() => {
                      alert('login realizado')
               })
