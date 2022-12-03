@@ -38,7 +38,6 @@ buttom2.addEventListener('click', ()=>{
 
 onAuthStateChanged(auth, (user) => {
        if (user){
-              alert(user.displayName)
               if(user.displayName == undefined || user.displayName == null){
                      var form = save('cadastro')
                      updateProfile(auth.currentUser, {
