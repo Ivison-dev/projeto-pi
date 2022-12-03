@@ -71,6 +71,23 @@ onAuthStateChanged(auth, (user) =>{
                       }).catch((error) => {
                         alert(error)
                     });
+                },
+                toPontosConhecimento(number){
+                    return `P$ ${number.toFixed(2)}`
+                }
+            },
+            computed: {
+                allItens(){
+                    return this.carrinho.itens.map(item =>({
+                        ...item,
+                        preco: this.toPontosConhecimento(item.preco)
+                    }))
+                },
+                allProdutos(){
+                    this.produtos.map(produto => ({
+                        ...produto,
+                        preco: this.toPontosConhecimento(produto.preco)
+                    }))
                 }
             }
         })
