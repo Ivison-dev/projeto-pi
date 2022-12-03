@@ -1,12 +1,16 @@
 # Dia: 25/04/2022
-- Verifições do login e cadastro
-- Observador de usuário ativo
-- Início das ações envolvendo
+- [x] Verifições do login e cadastro
+- [x] Observador de usuário ativo
+- [x] Início das ações envolvendo
 
 # Dia: 26/04/2022 (hoje)
-- Separar os arquivos JS por tela
-- Melhorar o fluxo do usuário
+- [x] Separar os arquivos JS por tela
+- [x] Melhorar o fluxo do usuário
 
 # Dia 29/05/2022
-- Melhorar as declarações
 
+- [x] Melhorar as declarações
+
+# Dia 03/12/2022
+- [x] Organizar carrinho
+- [ ] Inserir saldo de pontos de conhecimento no firebase
