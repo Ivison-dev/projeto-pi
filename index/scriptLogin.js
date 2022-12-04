@@ -27,6 +27,9 @@ buttom2.addEventListener('click', ()=>{
         createUserWithEmailAndPassword(auth, form[0], form[1]).then(() => {   
               signInWithEmailAndPassword(auth, form[0], form[1]).then(() => {
                             alert('login realizado')
+                            updateProfile(auth.currentUser, {
+                                   saldo: 1000
+                            })
               }) 
         })
         
