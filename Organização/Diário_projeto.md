@@ -3,7 +3,7 @@
 - [x] Observador de usuário ativo
 - [x] Início das ações envolvendo
 
-# Dia: 26/04/2022 (hoje)
+# Dia: 26/04/2022
 - [x] Separar os arquivos JS por tela
 - [x] Melhorar o fluxo do usuário
 
@@ -13,4 +13,4 @@
 
 # Dia 03/12/2022
 - [x] Organizar carrinho
-- [ ] Inserir saldo de pontos de conhecimento no firebase
+- [x] Fixar barra de navegação no topo da tela
