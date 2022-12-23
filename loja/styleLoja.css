@@ -77,7 +77,7 @@ box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23);
 
 
 
-/*------------------- Partes dos produtos ----------------------------------*/
+/*------------------- Partes dos cards ----------------------------------*/
 
 section{
     width: 95%;
@@ -88,7 +88,7 @@ section{
     margin-top: 10.7em;
 }
 
-.produto{
+.card{
     background-color: rgb(235, 240, 233);
     width: var(--img-largura);
     border-radius: 8px;
@@ -107,7 +107,7 @@ img{
     height: var(--tamanho-protudo);
     border-radius: 8px;
 }
-.produto:active {
+.card:active {
 	position:relative;
 	top:3px;
     left: 1px;
@@ -121,13 +121,13 @@ span{
     color: rgb(15, 228, 96);
 }
 
-.produto h3{
+.card h3{
     margin-top: 0.2em;
     text-align: end;
     margin-right: 0.4em;
 }
 
-.produtos{
+.cards{
     display: flex;
     justify-content: center;
 }
@@ -153,7 +153,7 @@ header h3{
 
 @media (max-width: 447px){
     
-    .produtos{
+    .cards{
         
         display: flex;
         justify-content:center;

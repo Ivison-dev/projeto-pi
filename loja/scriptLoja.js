@@ -1,12 +1,7 @@
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
 
-let produtos = [
-    {'nomeProduto': 'Maça','imagem': 'images/maca.jpg','preco': 8.50},
-    {'nomeProduto': 'Banana','imagem': 'images/banana.jpg','preco': 7.80},
-    {'nomeProduto': 'Acerola','imagem':'images/acerola.jpg','preco': 5.60},
-    {'nomeProduto': 'Laranga','imagem':'images/laranja.jpg','preco': 6.40},
-    {'nomeProduto': 'Siriguela','imagem': 'images/sireguela.jpg','preco': 4.00},
-]
+const url = 'https://FastApi.ivisondev.repl.co'
+
 // var buttonSair = document.getElementById('sair')
 const auth = getAuth()
 
@@ -29,8 +24,9 @@ onAuthStateChanged(auth, (user) =>{
                 'email': user.email,
                 'pontosConhecimento': 300
                 },
-              produtos: produtos,
-              carrinho: {itens: [], valorCompra: 0}
+              cards: [],
+              carrinho: {itens: [], valorCompra: 0},
+              baseURL: 'https://FastApi.ivisondev.repl.co'
             },
             methods: {
                 addItem(nome, preco){
@@ -74,8 +70,21 @@ onAuthStateChanged(auth, (user) =>{
                 },
                 toPontosConhecimento(number){
                     return `P$ ${number.toFixed(2)}`
+                },
+                // Request
+                getCards(){
+                    axios.get('https://FastApi.ivisondev.repl.co').then((response) =>{
+                        this.cards = response.data                        
+                    }).catch(error => {
+                        alert('error: '+ error)
+                    })
                 }
             },
+
+            beforeMount(){
+                this.getCards()
+             },
+
             computed: {
                 allItens(){
                     return this.carrinho.itens.map(item =>({
@@ -83,10 +92,10 @@ onAuthStateChanged(auth, (user) =>{
                         preco: this.toPontosConhecimento(item.preco)
                     }))
                 },
-                allProdutos(){
-                    this.produtos.map(produto => ({
-                        ...produto,
-                        preco: this.toPontosConhecimento(produto.preco)
+                allcards(){
+                    this.cards.map(card => ({
+                        ...card,
+                        preco: this.toPontosConhecimento(card.preco)
                     }))
                 }
             }
