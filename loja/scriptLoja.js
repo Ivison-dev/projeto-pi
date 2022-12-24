@@ -87,7 +87,7 @@ onAuthStateChanged(auth, (user) =>{
                         this.getCards()
                         return
                     }
-                    axios.get(this.baseURL + `/card/pesquisa/${this.valuePesquisa}`).then(response => {
+                    axios.get(this.baseURL + `/card/pesquisa/${this.valuePesquisa.trim()}`).then(response => {
                         this.cards = response.data
                     }).catch(error => {
                         alert("Erro: " + error)
@@ -108,6 +108,12 @@ onAuthStateChanged(auth, (user) =>{
                         preco: this.toPontosConhecimento(card.preco)
                     }))
                 }
+            },
+
+            watch: {
+                valuePesquisa: {
+                    handler: 'pesquisarCards'
+                } 
             },
 
             mounted(){

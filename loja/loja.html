@@ -27,14 +27,17 @@
             <div id="pesquisa">
                 <span 
                     id="lupa" class="material-icons" 
-                    v-on:change="pesquisarCards()"
                 >
                     search
                 </span>
                 <input 
                     type="search" name="search" id="input_pesquisa"
+                    list="cards"
                     v-model="valuePesquisa"
                 >
+                <datalist id="cards">
+                    <option v-for="card in cards" :value=card.titulo>
+                </datalist>
                 <span id="oculto" class="material-icons" >
                     search
                 </span>
