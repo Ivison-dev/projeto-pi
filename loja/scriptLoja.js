@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
 
-const url = 'https://FastApi.ivisondev.repl.co'
+
 
 // var buttonSair = document.getElementById('sair')
 const auth = getAuth()
@@ -81,7 +81,7 @@ onAuthStateChanged(auth, (user) =>{
                 }
             },
 
-            beforeMount(){
+            mounted(){
                 this.getCards()
              },
 
