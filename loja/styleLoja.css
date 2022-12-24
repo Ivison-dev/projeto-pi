@@ -47,7 +47,6 @@ nav span:active{
 
 }
 
-
 #input_pesquisa{
     position:relative;
     border: none;
@@ -58,15 +57,15 @@ nav span:active{
     -webkit-box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23); 
 box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23);
     outline: none;
-    text-align: center;
-    
+    text-align: center;    
 }
 
 #lupa{
     position: relative;
-    top: 7.3px;
-    right: 30px;
+    top: 7.1px;
+    left: 35px;
     cursor: pointer;
+    z-index: 10;
 }
 
 
@@ -165,6 +164,8 @@ header h3{
         flex-direction: column;
         flex-wrap: nowrap;
 
-    }
-    
+    }   
 }
+
+
+  

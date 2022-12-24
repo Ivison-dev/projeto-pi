@@ -26,7 +26,8 @@ onAuthStateChanged(auth, (user) =>{
                 },
               cards: [],
               carrinho: {itens: [], valorCompra: 0},
-              baseURL: 'https://FastApi.ivisondev.repl.co'
+              baseURL: 'https://FastApi.ivisondev.repl.co',
+              valuePesquisa: ''
             },
             methods: {
                 addItem(nome, preco){
@@ -71,19 +72,28 @@ onAuthStateChanged(auth, (user) =>{
                 toPontosConhecimento(number){
                     return `P$ ${number.toFixed(2)}`
                 },
+
                 // Request
                 getCards(){
-                    axios.get('https://FastApi.ivisondev.repl.co').then((response) =>{
+                    axios.get(this.baseURL).then((response) =>{
                         this.cards = response.data                        
                     }).catch(error => {
                         alert('error: '+ error)
                     })
+                },
+
+                pesquisarCards(){
+                    if (this.valuePesquisa.trim() == ''){
+                        this.getCards()
+                        return
+                    }
+                    axios.get(this.baseURL + `/card/pesquisa/${this.valuePesquisa}`).then(response => {
+                        this.cards = response.data
+                    }).catch(error => {
+                        alert("Erro: " + error)
+                    })
                 }
             },
-
-            mounted(){
-                this.getCards()
-             },
 
             computed: {
                 allItens(){
@@ -98,7 +108,11 @@ onAuthStateChanged(auth, (user) =>{
                         preco: this.toPontosConhecimento(card.preco)
                     }))
                 }
-            }
+            },
+
+            mounted(){
+                this.getCards()
+             }
         })
     }
     else{
