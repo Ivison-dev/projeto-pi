@@ -25,11 +25,17 @@
             </nav>
     
             <div id="pesquisa">
-                <span id="oculto" class="material-icons" >
+                <span 
+                    id="lupa" class="material-icons" 
+                    v-on:click="pesquisarCards()"
+                >
                     search
                 </span>
-                <input type="search" name="search" id="input_pesquisa">
-                <span id="lupa" class="material-icons" >
+                <input 
+                    type="search" name="search" id="input_pesquisa"
+                    v-model="valuePesquisa"
+                >
+                <span id="oculto" class="material-icons" >
                     search
                 </span>
             </div>
