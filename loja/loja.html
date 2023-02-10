@@ -34,10 +34,7 @@
                     type="search" name="search" id="input_pesquisa"
                     list="cards"
                     v-model="valuePesquisa"
-                >
-                <datalist id="cards">
-                    <option v-for="card in cards" :value=card.titulo>
-                </datalist>
+                >                
                 <span id="oculto" class="material-icons" >
                     search
                 </span>
@@ -46,13 +43,38 @@
         <div class="cards">
             <section>
 
-                <div class="card"  v-for="(card, index) in cards"
-                    v-on:click="addItem(card.titulo, card.preco)"
+                <article class="card"  v-for="(card, index) in cards"                    
                 >
-                    <h2>{{card.titulo}}</h2>
-                    <img :name="index" src="images/maca.jpg" alt="">
-                    <h3>{{toPontosConhecimento(card.preco)}}<span>Kg</span></h3>
-                </div>
+                    <div class="card__publication">
+                        <img src="images/maca.jpg">
+                        <div>
+                            <span class="card__author">
+                                <i class="material-icons">
+                                    person
+                                </i> 
+                                Ivison
+                            </span>
+                            <span class="card__date">
+                                <i class="material-icons">
+                                    calendar_month
+                                </i>
+                                Fevereiro 9, 2023
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card__info">
+                        <h2 class="card__title">{{card.titulo}}</h2>
+                        <span class="card__subtitle">
+                            Frutas
+                        </span>
+                        <p class="card__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus reiciendis voluptas aut laboriosam dignissimos reprehenderit voluptates libero vel! Obcaecati totam rem maiores voluptates magni tenetur repudiandae beatae illum excepturi omnis.</p>
+                        <a class="card__cta"
+                           v-on:click="addItem(card.titulo, card.preco)"
+                        >
+                            Adicionar <span>&rarr;</span>
+                        </a>
+                    </div>
+                </article>
     
             </section>
         </div>
