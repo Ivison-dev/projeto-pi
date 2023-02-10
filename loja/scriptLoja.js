@@ -27,9 +27,11 @@ onAuthStateChanged(auth, (user) =>{
               cards: [],
               carrinho: {itens: [], valorCompra: 0},
               baseURL: 'https://FastApi.ivisondev.repl.co',
-              valuePesquisa: ''
+              valuePesquisa: '',
+              mensagens: []
             },
             methods: {
+                // Funções de interação
                 addItem(nome, preco){
                     this.carrinho.itens.push({
                         nome,
@@ -60,7 +62,8 @@ onAuthStateChanged(auth, (user) =>{
                     }
                     this.usuario.pontosConhecimento -= this.carrinho.valorCompra
                     this.carrinho.valorCompra = 0
-                    this.carrinho.itens = []                   
+                    this.carrinho.itens = [],
+                    this.addMensagem('sucesso', 'Compra realizada')                   
                 },
                 sair(){
                     signOut(auth).then(() => {
@@ -69,8 +72,24 @@ onAuthStateChanged(auth, (user) =>{
                         alert(error)
                     });
                 },
+
+                // Funções secundárias
                 toPontosConhecimento(number){
                     return `P$ ${number.toFixed(2)}`
+                },
+
+                addMensagem(tipo, texto){
+                    var tipos = {
+                        'sucesso': ['alert-success', '#check-circle-fill'],
+                        'informacao': ['alert-primary', '#info-fill'],
+                        'erro': ['alert-danger', '#exclamation-triangle-fill'],
+                        'perigo': ['alert-warning', '#exclamation-triangle-fill'],
+                    }
+                    this.mensagens.push({
+                        'tipo': tipos[tipo][0],
+                        'icone': tipos[tipo][1],
+                        'status': 'show',
+                        'texto': texto})
                 },
 
                 // Request
@@ -113,7 +132,15 @@ onAuthStateChanged(auth, (user) =>{
             watch: {
                 valuePesquisa: {
                     handler: 'pesquisarCards'
-                } 
+                },
+                mensagens: {
+                    handler(){
+                        setTimeout(function(){
+                            this.mensagens = []                          
+                            
+                        }, 4000)
+                    }
+                }
             },
 
             mounted(){
