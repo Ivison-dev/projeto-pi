@@ -184,12 +184,13 @@ section{
 /*-------------- Responsivo -----------------------------*/
 
 @media (max-width: 447px){
-    
+
+    .card{
+      margin: 1em 0.6em;
+    }
     .cards{
-        
         display: flex;
         justify-content:center;
-       
     }
 
     section{
