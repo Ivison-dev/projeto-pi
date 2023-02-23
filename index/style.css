@@ -184,13 +184,12 @@ body{
 #mensagens {
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
-    width: 100%;
+    flex-direction: column;
     position: fixed;
-    z-index: 50;
-    margin: 0;
-}
+    z-index: 100;
+    top: 0.5em;
+} 
 
 .btn-close-message {
     margin-left: .6em;

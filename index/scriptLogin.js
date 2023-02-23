@@ -6,29 +6,6 @@ const auth = getAuth();
 
 var buttom2 = document.getElementById('submit')
 
-
-buttom2.addEventListener('click', ()=>{
-    var validacao = validar_cadastro();
-    if (! validacao){
-        alert('oi')
-        var form = save('cadastro')
-        alert(form)
- 
-        createUserWithEmailAndPassword(auth, form[0], form[1]).then(() => {   
-              signInWithEmailAndPassword(auth, form[0], form[1]).then(() => {
-                            alert('login realizado')
-                            updateProfile(auth.currentUser, {
-                                   saldo: 1000
-                            })
-              }) 
-        })
-        
-    }
-    else{
-           alert('erro')
-    }
-})
-
 onAuthStateChanged(auth, (user) => {
        if (user){
               if(user.displayName == undefined || user.displayName == null){
@@ -48,11 +25,13 @@ var app = new Vue({
                 email: {'value': '', 'status': ''},
                 senha: {'value': '', 'status': ''}, 
             },
+            cadastro: {
+                nome: {'value': '', 'status': ''}, 
+                email: {'value': '', 'status': ''},
+                senha: {'value': '', 'status': ''},
+                confirmarSenha: {'value': '', 'status': ''},
+            },
             paginaAtual: '',
-            olhos: [
-                {'icone': 'uil-eye-slash', tipo:'password'},
-                {'icone': 'uil-eye-slash', tipo:'password'}
-            ],
             mensagens: []
         },
         methods: {
@@ -63,6 +42,25 @@ var app = new Vue({
                     signInWithEmailAndPassword(auth, validacao[1], validacao[2]).then(() => {
                         alert('login realizado')
                     })
+                }
+            },
+
+            cadastrar(){
+                var validacao = this.validar_cadastro();
+                if (! validacao){
+                    alert('oi')
+                    alert(this.cadastro)
+                    var email = this.cadastro.email.value,
+                    senha = this.cadastro.confirmarSenha.value;
+            
+                    createUserWithEmailAndPassword(auth, email, senha).then(() => {   
+                        signInWithEmailAndPassword(auth, email, senha).then(() => {
+                            this.addMensagem('sucesso', 'Cadastro Realizado')
+                        }) 
+                    })                    
+                }
+                else{
+                    alert('erro')
                 }
             },
 
@@ -115,15 +113,16 @@ var app = new Vue({
                 else{
                     this.login.email.status = 'correct'
 
-                    if( email.value.indexOf('@') == -1){
-                        alert('Sem @ ')                   
+                    if( email.value.indexOf('@') == -1){                   
                         this.login.email.status = 'error'
-                        num = +1
+                        num = +
+                        this.addMensagem('perigo', 'Email: Sem @')
                     }
                     else if(email.value.split('@')[1] !== 'gmail.com'){
                         alert('Sem gmail.com')                   
                         this.login.email.status = 'error'
                         num = +1
+                        this.addMensagem('perigo', 'Email: Inválido')
                     }
                     else{
                         this.login.email.status = 'correct'
@@ -133,7 +132,7 @@ var app = new Vue({
                 // Compo senha
                 if (senha.value.length < 6){
                     this.login.senha.status = 'error'
-                    this.addMensagem('perigo', 'No mínimo 6 caractéres na senha' )
+                    this.addMensagem('perigo', 'Senha: No mínimo 6 caractéres' )
                     num = +1
                 }
                 else{                    
@@ -148,9 +147,75 @@ var app = new Vue({
                 }
             },
 
+            validar_cadastro(){
+                var nome = this.cadastro.nome
+                var email = this.cadastro.email
+                var senha = this.cadastro.senha
+                var confirmarSenha = this.cadastro.confirmarSenha
+                var num = 0
+            
+                if (nome.value.length < 5){
+                    this.cadastro.nome.status = 'error'
+                    this.addMensagem('perigo', 'Nome: No mínimo 6 caractéres')
+                    num = +1
+                }
+                else{
+                    this.cadastro.nome.status = 'correct'
+                }
+            
+                // Campo Email
+                if (email.value.length < 5){
+                    this.cadastro.email.status = 'error'
+                    this.addMensagem('perigo', 'Email: Inválido')
+                    num = +1                    
+                }
+                else{
+
+                    if( email.value.indexOf('@') == -1){
+                        alert('Sem @ ')
+                        this.addMensagem('perigo', 'Email: Sem @')
+                        num = +1
+                    }
+                    else if(email.value.split('@')[1] !== 'gmail.com'){
+                        alert('Sem gmail.com')
+                        this.cadastro.email.status = 'error'
+                        this.addMensagem('perigo', 'Email: Inválido')
+                        num = +1
+                    }
+                    else{
+                        this.cadastro.email.status = 'correct'
+                    }
+                }                            
+                                            
+                // Compo senha
+                if (senha.value.length < 6){
+                    this.cadastro.senha.status = 'error'                    
+                    this.cadastro.confirmarSenha.status = 'error'
+                    this.addMensagem('perigo', 'Senha: No mínimo 6 caractéres')
+                    num = +1
+
+                }
+                else{
+                    this.cadastro.senha.status = 'correct' 
+                    
+                    //confirmar senha
+                    if (senha.value !== confirmarSenha.value) {            
+                        this.cadastro.confirmarSenha.status = 'error'
+                        this.addMensagem('perigo', 'Confirmação: Incorreta')
+                        num = +1
+                    }
+                    else{
+                        this.cadastro.confirmarSenha.status = 'correct'
+                    }
+                }                            
+            
+                return num
+            
+            },
+
             addMensagem(tipo, texto){
                 var tipos = {
-                    'sucesso': ['alert-success', '#check-circle-fill'],
+                    'sucessco': ['alert-success', '#check-circle-fill'],
                     'informacao': ['alert-primary', '#info-fill'],
                     'erro': ['alert-danger', '#exclamation-triangle-fill'],
                     'perigo': ['alert-warning', '#exclamation-triangle-fill'],

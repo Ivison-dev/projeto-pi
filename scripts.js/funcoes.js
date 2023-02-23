@@ -2,7 +2,7 @@ export function save(id){
     var form = document.getElementById(id)
     var nome = form.nome.value
     var email = form.elements['email'].value
-    var senha = form.elements['confirmarsenha'].value
+    var senha = form.elements['confirmarSenha'].value
     return [email,senha,nome]
 }
 
