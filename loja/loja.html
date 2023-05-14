@@ -39,14 +39,21 @@
                     search
                 </span>
             </div>
+           
         </header>       
         
         <div class="cards">
+            
             <section>
+                    <div id="div-loading" class="spinner-border" role="status"
+                    v-if="cards.lenght == 0" 
+                    >
+                        <span class="sr-only"></span>
+                    </div>
                 <article class="card"  v-for="(card, index) in cards"                    
                 >
                     <div class="card__publication">
-                        <img src="images/maca.jpg">
+                        <!-- <img src="images/maca.jpg"> -->
                         <div>
                             <span class="card__author">
                                 <i class="material-icons">

@@ -91,6 +91,16 @@ box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23);
     margin-left: .6em;
 }
 
+/*------------------- Loading ----------------------------------*/
+
+#div-loading{
+    display: flex;
+    /* background-color: #fb1616; */
+    width: 8rem; 
+    height: 8rem;
+    margin: auto;
+    font-size: 60px;
+}
 
 /*------------------- Partes dos cards ----------------------------------*/
 
