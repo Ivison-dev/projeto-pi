@@ -2,17 +2,10 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 
 
 
-// var buttonSair = document.getElementById('sair')
+
 const auth = getAuth()
 
-// buttonSair.addEventListener('click', ()=>{
-//     alert('oi')
-//     signOut(auth).then(() => {
-//         alert('Desconectado')
-//       }).catch((error) => {
-//         alert(error)
-//       });
-// })
+
 
 onAuthStateChanged(auth, (user) =>{
     if (user){
