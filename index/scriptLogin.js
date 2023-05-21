@@ -4,10 +4,10 @@ import { save, validar_cadastro, validar_login } from '../scripts.js/funcoes.js'
 
 const auth = getAuth();
 
-var buttom2 = document.getElementById('submit')
+let pass = true
 
 onAuthStateChanged(auth, (user) => {
-       if (user){
+       if (user && pass){
               if(user.displayName == undefined || user.displayName == null){
                      var form = save('cadastro')
                      updateProfile(auth.currentUser, {
@@ -55,23 +55,30 @@ var app = new Vue({
                     var email = this.cadastro.email.value,
                     senha = this.cadastro.confirmarSenha.value;
 
-                    axios.post(this.baseURL + '/user/cadastrar', {
-                        'nome': this.cadastro.nome.value,
-                        'email': this.cadastro.email.value,
-                        'titulo': 'null',
-                        'pontos_conhecimento': 10
-                    }).then(response => {
-                        alert(response.data.mensagem)
-                    }).catch(error => {
-                        alert('Erro: '+ error)
-                    })
+                    pass = false;
+
+                    
             
                     createUserWithEmailAndPassword(auth, email, senha).then(() => {   
-                       signInWithEmailAndPassword(auth, email, senha).then(() => { 
-                            alert('login no cadastro')
-                            this.addMensagem('sucesso', 'Cadastro Realizado')                            
-                        }) 
-                    })                    
+                            alert('login no cadastro')                            
+                            alert(this.cadastro.nome.value, this.cadastro.email.value)
+                            axios.post(this.baseURL + '/user/cadastrar', {
+                                'nome': this.cadastro.nome.value,
+                                'email': this.cadastro.email.value,
+                                'titulo': 'null',
+                                'pontos_conhecimento': 1000
+                            }).then(response => {
+                                alert(response.data.mensagem)
+                                window.location.href = "../loja/loja.html"
+                            }).catch(error => {
+                                alert('Erro: '+ error)
+                            });
+                            
+                            
+                        }).catch(error => {
+                            alert("Error: " + error)
+                            pass = true
+                        })                   
                 }
                 else{
                     alert('erro')

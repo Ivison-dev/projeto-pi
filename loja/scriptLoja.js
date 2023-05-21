@@ -15,7 +15,7 @@ onAuthStateChanged(auth, (user) =>{
               usuario: {
                 'nome': user.displayName,
                 'email': user.email,
-                'pontosConhecimento': 300
+                'pontos_conhecimento': 300
                 },
               cards: [],
               carrinho: {itens: [], valorCompra: 0},
@@ -49,11 +49,12 @@ onAuthStateChanged(auth, (user) =>{
                         alert('Insira um item no carrinho')
                         return
                     }
-                    if (this.usuario.pontosConhecimento < this.carrinho.valorCompra){
+                    if (this.usuario.pontos_conhecimento < this.carrinho.valorCompra){
                         alert('Saldo insuficiente')
                         return
                     }
-                    this.usuario.pontosConhecimento -= this.carrinho.valorCompra
+                    this.usuario.pontos_conhecimento -= this.carrinho.valorCompra
+                    this.atualizar_usuario('pontos_conhecimento', this.usuario.pontos_conhecimento)
                     this.carrinho.valorCompra = 0
                     this.carrinho.itens = [],
                     this.addMensagem('sucesso', 'Compra realizada')                   
@@ -67,7 +68,7 @@ onAuthStateChanged(auth, (user) =>{
                 },
 
                 // Funções secundárias
-                toPontosConhecimento(number){
+                topontos_conhecimento(number){
                     return `P$ ${number.toFixed(2)}`
                 },
 
@@ -104,20 +105,40 @@ onAuthStateChanged(auth, (user) =>{
                     }).catch(error => {
                         alert("Erro: " + error)
                     })
-                }
+                },
+
+                conectarUsuario(){
+                    axios.get(this.baseURL + `/user/${user.email}`).then(
+                        response => {
+                            this.usuario = response.data
+                        }
+                    ).catch(error => {
+                        alert('Erro: ' + error)
+                    })
+                },
+
+                atualizar_usuario(atributo, valor){
+                    axios.post(this.baseURL + `/user/update/${user.email}`, {
+                        atributo,
+                        valor
+                    }).catch(error => {
+                        alert("Erro ao tentar atualizar no banco")
+                        alert('Erro: ' + error)
+                    })
+                },
             },
 
             computed: {
                 allItens(){
                     return this.carrinho.itens.map(item =>({
                         ...item,
-                        preco: this.toPontosConhecimento(item.preco)
+                        preco: this.topontos_conhecimento(item.preco)
                     }))
                 },
                 allcards(){
                     this.cards.map(card => ({
                         ...card,
-                        preco: this.toPontosConhecimento(card.preco)
+                        preco: this.topontos_conhecimento(card.preco)
                     }))
                 }
             },
@@ -137,7 +158,8 @@ onAuthStateChanged(auth, (user) =>{
             },
 
             mounted(){
-                this.getCards()
+                this.getCards(),
+                this.conectarUsuario()
              }
         })
     }
