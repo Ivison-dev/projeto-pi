@@ -32,7 +32,8 @@ var app = new Vue({
                 confirmarSenha: {'value': '', 'status': ''},
             },
             paginaAtual: '',
-            mensagens: []
+            mensagens: [],
+            baseURL: 'https://FastApi.ivisondev.repl.co',
         },
         methods: {
             // -------- Funções de interação -------- //
@@ -41,6 +42,7 @@ var app = new Vue({
                 if(! validacao[0]){
                     signInWithEmailAndPassword(auth, validacao[1], validacao[2]).then(() => {
                         alert('login realizado')
+                        
                     })
                 }
             },
@@ -49,13 +51,25 @@ var app = new Vue({
                 var validacao = this.validar_cadastro();
                 if (! validacao){
                     alert('oi')
-                    alert(this.cadastro)
+                    alert(this.cadastro + 'oi')
                     var email = this.cadastro.email.value,
                     senha = this.cadastro.confirmarSenha.value;
+
+                    axios.post(this.baseURL + '/user/cadastrar', {
+                        'nome': this.cadastro.nome.value,
+                        'email': this.cadastro.email.value,
+                        'titulo': 'null',
+                        'pontos_conhecimento': 10
+                    }).then(response => {
+                        alert(response.data.mensagem)
+                    }).catch(error => {
+                        alert('Erro: '+ error)
+                    })
             
                     createUserWithEmailAndPassword(auth, email, senha).then(() => {   
-                        signInWithEmailAndPassword(auth, email, senha).then(() => {
-                            this.addMensagem('sucesso', 'Cadastro Realizado')
+                       signInWithEmailAndPassword(auth, email, senha).then(() => { 
+                            alert('login no cadastro')
+                            this.addMensagem('sucesso', 'Cadastro Realizado')                            
                         }) 
                     })                    
                 }
@@ -231,5 +245,6 @@ var app = new Vue({
 
         mounted(){
             this.replacePasswordText()
-        }
+        },
+
 })
