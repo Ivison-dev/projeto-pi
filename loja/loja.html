@@ -74,7 +74,7 @@
                         <span class="card__subtitle">
                            P$ {{card.preco.toFixed(2)}}
                         </span>
-                        <p class="card__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus reiciendis voluptas aut laboriosam dignissimos reprehenderit voluptates libero vel! Obcaecati totam rem maiores voluptates magni tenetur repudiandae beatae illum excepturi omnis.</p>
+                        <p class="card__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus reiciendis voluptas aut laboridddosam dignissimos reprehenderit voluptates libero vel! Obcaecati totam rem maiores voluptates magni tenetur repudiandae beatae illum excepturi omnis.</p>
                         <a class="card__cta"
                            v-on:click="addItem(card.titulo, card.preco)"
                         >
@@ -107,7 +107,7 @@
                 </div>
                 <div id="footerCarrinho" class="modal-footer">
                     <div>
-                        <h3 id="valor">Valor: {{toPontosConhecimento(carrinho.valorCompra)}}</h3>
+                        <h3 id="valor">Valor: {{topontos_conhecimento(carrinho.valorCompra)}}</h3>
                     </div>
                     <div>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -131,7 +131,7 @@
                 <div class="modal-body">
                     <h3>Nome: {{usuario.nome}}</h3>
                     <h3>Email: {{usuario.email}}</h3>
-                    <h3>Pontos: {{toPontosConhecimento(usuario.pontosConhecimento)}}</h3>
+                    <h3>Pontos: {{topontos_conhecimento(usuario.pontos_conhecimento)}}</h3>
                     <button id="sair" type="button" class="btn btn-dark"
                         v-on:click="sair()" 
                     >Logout
@@ -146,11 +146,13 @@
         </div>
 
     </div>
-
-    <script type="module" src="../scripts.js/initial.js" crossorigin="anonymous"></script>
-    <script type="module" src="./scriptLoja.js" crossorigin="anonymous"></script>
-    <script type="module" src="../scripts.js/funcoes.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    
+    <div id="scripts">
+        <script type="module" src="../scripts.js/initial.js" crossorigin="anonymous"></script>
+        <script type="module" src="./scriptLoja.js" crossorigin="anonymous"></script>
+        <script type="module" src="../scripts.js/funcoes.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    </div>
 </body>
 </html>

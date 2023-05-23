@@ -4,10 +4,10 @@ import { save, validar_cadastro, validar_login } from '../scripts.js/funcoes.js'
 
 const auth = getAuth();
 
-var buttom2 = document.getElementById('submit')
+let pass = true
 
 onAuthStateChanged(auth, (user) => {
-       if (user){
+       if (user && pass){
               if(user.displayName == undefined || user.displayName == null){
                      var form = save('cadastro')
                      updateProfile(auth.currentUser, {
@@ -32,7 +32,8 @@ var app = new Vue({
                 confirmarSenha: {'value': '', 'status': ''},
             },
             paginaAtual: '',
-            mensagens: []
+            mensagens: [],
+            baseURL: 'https://FastApi.ivisondev.repl.co',
         },
         methods: {
             // -------- Funções de interação -------- //
@@ -41,6 +42,7 @@ var app = new Vue({
                 if(! validacao[0]){
                     signInWithEmailAndPassword(auth, validacao[1], validacao[2]).then(() => {
                         alert('login realizado')
+                        
                     })
                 }
             },
@@ -49,15 +51,34 @@ var app = new Vue({
                 var validacao = this.validar_cadastro();
                 if (! validacao){
                     alert('oi')
-                    alert(this.cadastro)
+                    alert(this.cadastro + 'oi')
                     var email = this.cadastro.email.value,
                     senha = this.cadastro.confirmarSenha.value;
+
+                    pass = false;
+
+                    
             
                     createUserWithEmailAndPassword(auth, email, senha).then(() => {   
-                        signInWithEmailAndPassword(auth, email, senha).then(() => {
-                            this.addMensagem('sucesso', 'Cadastro Realizado')
-                        }) 
-                    })                    
+                            alert('login no cadastro')                            
+                            alert(this.cadastro.nome.value, this.cadastro.email.value)
+                            axios.post(this.baseURL + '/user/cadastrar', {
+                                'nome': this.cadastro.nome.value,
+                                'email': this.cadastro.email.value,
+                                'titulo': 'null',
+                                'pontos_conhecimento': 1000
+                            }).then(response => {
+                                alert(response.data.mensagem)
+                                window.location.href = "../loja/loja.html"
+                            }).catch(error => {
+                                alert('Erro: '+ error)
+                            });
+                            
+                            
+                        }).catch(error => {
+                            alert("Error: " + error)
+                            pass = true
+                        })                   
                 }
                 else{
                     alert('erro')
@@ -231,5 +252,6 @@ var app = new Vue({
 
         mounted(){
             this.replacePasswordText()
-        }
+        },
+
 })
