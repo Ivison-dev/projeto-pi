@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styleLoja.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -50,8 +51,13 @@
                     >
                         <span class="sr-only"></span>
                     </div>
+
                 <article class="card"  v-for="(card, index) in cards"                    
-                >
+                >   
+                    <div class="circle">
+                        <span class="number">{{card.biomassa}}</span>
+                    </div>
+                
                     <div class="card__publication">
                         <!-- <img src="images/maca.jpg"> -->
                         <div>
@@ -74,12 +80,24 @@
                         <span class="card__subtitle">
                            P$ {{card.preco.toFixed(2)}}
                         </span>
-                        <p class="card__description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus reiciendis voluptas aut laboridddosam dignissimos reprehenderit voluptates libero vel! Obcaecati totam rem maiores voluptates magni tenetur repudiandae beatae illum excepturi omnis.</p>
+                        <p class="card__description" style="white-space: pre-line;">{{card.descricao}}
+                        </p>
                         <a class="card__cta"
                            v-on:click="addItem(card.titulo, card.preco)"
                         >
                             Adicionar <span>&rarr;</span>
                         </a>
+                    </div>
+                    <div class="defesa-ataque" 
+                     v-on:click="alterarVisibilidadePopover(card.titulo + 'Popover')"
+                    >
+                        <span class="number">
+                            {{card.ataque}}/{{card.defesa}}
+                        </span>
+                    </div>
+                    <div :id="card.titulo + 'Popover'" class="popover">
+                        <h3 class="popover-title">Propriedades</h3>
+                        <div class="popover-content">Ataque: {{card.ataque}}<br>Defesa: {{card.defesa}}</div>
                     </div>
                 </article>
     
@@ -152,7 +170,7 @@
         <script type="module" src="./scriptLoja.js" crossorigin="anonymous"></script>
         <script type="module" src="../scripts.js/funcoes.js" ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     </div>
 </body>
 </html>

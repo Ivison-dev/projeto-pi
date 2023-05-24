@@ -21,7 +21,8 @@ onAuthStateChanged(auth, (user) =>{
               carrinho: {itens: [], valorCompra: 0},
               baseURL: 'https://FastApi.ivisondev.repl.co',
               valuePesquisa: '',
-              mensagens: []
+              mensagens: [],
+              visibilidadePopover: '',
             },
             methods: {
                 // Funções de interação
@@ -65,6 +66,16 @@ onAuthStateChanged(auth, (user) =>{
                       }).catch((error) => {
                         alert(error)
                     });
+                },
+
+                alterarVisibilidadePopover(index){                    
+                    var popover = document.getElementById(index)
+                    if (popover.className === "popover"){
+                        popover.className = "popover active"
+                    } 
+                    else{
+                        popover.className = "popover"
+                    }
                 },
 
                 // Funções secundárias
