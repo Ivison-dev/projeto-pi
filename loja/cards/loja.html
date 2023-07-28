@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleLoja.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>loja</title>
+</head>
+<body>
+    <div id="app">           
+        <header>
+            <nav>
+                <div class="nav">
+                    <div id="div-carrinho">
+                        <span 
+                         class="material-icons icons-nav"
+                         data-bs-toggle="modal" data-bs-target="#modalCarrinho" 
+                        > shopping_cart</span>
+                        <div id="count-item">
+                            {{carrinho.itens.length}}
+                        </div>
+                    </div>
+                    
+                    <span 
+                     class="material-icons icons-nav"
+                     data-bs-toggle="modal" data-bs-target="#modalMenu" 
+                    > menu</span>
+                </div>
+            </nav>
+    
+            <div id="pesquisa">
+                <span 
+                    id="lupa" class="material-icons" 
+                >
+                    search
+                </span>
+                <input 
+                    type="search" name="search" id="input_pesquisa"
+                    list="cards"
+                    v-model="valuePesquisa"
+                >                
+                <span id="oculto" class="material-icons" >
+                    search
+                </span>
+            </div>
+           
+        </header>       
+        
+        <div class="cards">
+            
+            <section>
+                    <div id="div-loading" class="spinner-border" role="status"
+                    v-if="cards.lenght == 0" 
+                    >
+                        <span class="sr-only"></span>
+                    </div>
+
+                <article class="card"  v-for="(card, index) in cards"                    
+                >   
+                    <div class="circle">
+                        <span class="number">{{card.biomassa}}</span>
+                    </div>
+                
+                    <div class="card__publication">
+                        <!-- <img src="images/maca.jpg"> -->
+                        <div>
+                            <span class="card__author">
+                                <i class="material-icons">
+                                    person
+                                </i> 
+                                Ivison
+                            </span>
+                            <span class="card__date">
+                                <i class="material-icons">
+                                    calendar_month
+                                </i>
+                                Fevereiro 9, 2023
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card__info">
+                        <h2 class="card__title">{{card.titulo}}</h2>
+                        <span class="card__subtitle">
+                           P$ {{card.preco.toFixed(2)}}
+                        </span>
+                        <p class="card__description" style="white-space: pre-line;">{{card.descricao}}
+                        </p>
+                        <a class="card__cta"
+                           v-on:click="addItem(card.titulo, card.preco)"
+                        >
+                            Adicionar <span>&rarr;</span>
+                        </a>
+                    </div>
+                    <div class="defesa-ataque" 
+                     v-on:click="alterarVisibilidadePopover(card.titulo + 'Popover')"
+                    >
+                        <span class="number">
+                            {{card.ataque}}/{{card.defesa}}
+                        </span>
+                    </div>
+                    <div :id="card.titulo + 'Popover'" class="popover">
+                        <h3 class="popover-title">Propriedades</h3>
+                        <div class="popover-content">Ataque: {{card.ataque}}<br>Defesa: {{card.defesa}}</div>
+                    </div>
+                </article>
+    
+            </section>
+        </div>
+
+        <!-- Modais -->
+        <div class="modal fade" id="modalCarrinho" tabindex="-1" aria-labelledby="modalCarrinhoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalCarrinhoLabel">Carrinho</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <div class="modal-body">
+                    <h3 v-if="carrinho.itens.length <= 0">Sem itens no carrinho</h3>
+                    <table>
+                        <tr class="item" v-for="(item, index) in allItens">
+                            <td>{{item.nome}}: {{item.preco}}</td>
+                            <td><span class="material-icons"
+                                v-on:click="removeItem(index)"
+                            >delete</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="footerCarrinho" class="modal-footer">
+                    <div>
+                        <h3 id="valor">Valor: {{topontos_conhecimento(carrinho.valorCompra)}}</h3>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary"
+                            v-on:click="efetuarCompra()"
+                        >Efetuar compra</button>
+                    </div>                   
+
+                </div>
+            </div>
+            <a href="../../scripts.js/initial.js"></a>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalMenu" tabindex="-1" aria-labelledby="modalMenuLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalMenuLabel">Menu</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <div id="menu" class="modal-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item item"
+                         @click="hrefBeneficios()"
+                        >Benefícios</li>
+                        <li class="list-group-item list-group-item item" 
+                        data-bs-toggle="modal" data-bs-target="#modalConta">Conta</li>
+                        <li class="list-group-item list-group-item item">Chat</li>
+                        <li class="list-group-item list-group-item item">Suporte</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>                                       
+                </div>
+            </div>
+            
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalConta" tabindex="-1" aria-labelledby="modalContaLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalContaLabel">Conta</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Nome: {{usuario.nome}}</h3>
+                    <h3>Email: {{usuario.email}}</h3>
+                    <h3>Pontos: {{topontos_conhecimento(usuario.pontos_conhecimento)}}</h3>
+                    <button id="sair" type="button" class="btn btn-dark"
+                        v-on:click="sair()" 
+                    >Logout
+                    </button>
+                </div>
+                <!-- <div class="modal-footer">
+
+
+                </div> -->
+            </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div id="scripts">
+        <script type="module" src="../../scripts.js/initial.js" crossorigin="anonymous"></script>
+        <script type="module" src="./scriptLoja.js" crossorigin="anonymous"></script>
+        <script type="module" src="../../scripts.js/funcoes.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    </div>
+</body>
+</html>
