@@ -14,7 +14,7 @@ onAuthStateChanged(auth, (user) => {
                             displayName: form[2]
                    })
               }
-              window.location.href = "../loja/loja.html"
+              window.location.href = "../loja/cards/loja.html"
        }
  })
 

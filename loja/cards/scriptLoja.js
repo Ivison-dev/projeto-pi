@@ -78,6 +78,10 @@ onAuthStateChanged(auth, (user) =>{
                     }
                 },
 
+                hrefBeneficios(){
+                    window.location.href = '../beneficios/beneficios.html'
+                },
+
                 // Funções secundárias
                 topontos_conhecimento(number){
                     return `P$ ${number.toFixed(2)}`
@@ -175,7 +179,7 @@ onAuthStateChanged(auth, (user) =>{
         })
     }
     else{
-        window.location.href = '../index/index.html'
+        window.location.href = '../../index/index.html'
     }
 })
 

@@ -1,0 +1,173 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* html{
+    font-size: 62.5%;
+} */
+body{
+    font-size: 1em;
+    color: #333;
+    background-color: #eee;
+}
+:root{
+    --tamanho-protudo: 10em;
+    --img-largura: 13em;
+}
+
+/*------------------- Parte superior -----------------------------*/
+header{
+    width: 100%;
+    background: linear-gradient(90deg, rgba(142,45,226,1) 0%, rgba(74,0,224,1) 100%);
+    border-radius: 0px 0px 36px 36px;
+    margin-bottom: 50px;
+    position: fixed;
+    z-index: 12;
+}
+nav{
+    display: flex;
+    justify-content: center;
+}
+.nav{
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2px;
+}
+nav span{
+    color: #ffff;
+    cursor: pointer;
+}
+nav span:active{
+    position: relative;
+    top: 1px;
+}
+
+.icons-nav{
+    font-size: 2.5em;
+}
+
+#div-carrinho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+#count-item{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2em;
+}
+
+#count-item{
+    color: #ffffff;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.05em 0.5em;
+    border-radius: 100%;
+}
+
+#menu{
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+}
+
+#menu .item{
+    opacity: 0.5;
+    transition: all 0.5s 0s ease;
+}
+
+#menu .item:hover{
+    cursor: pointer;
+    opacity: 1;
+}
+
+#menu .item:active{
+    position: relative;
+    top: 2px;
+}
+
+#pesquisa{
+    height: 4.4em;
+    border-radius:  36px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+
+}
+#input_pesquisa{
+    position:relative;
+    border: none;
+	top:12px;
+    border-radius: 20px;
+    width: 86%;
+    height: 2.6em;
+    -webkit-box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23); 
+box-shadow: 5px 5px 50px 5px rgba(0,0,0,0.23);
+    outline: none;
+    text-align: center;    
+}
+#lupa{
+    position: relative;
+    top: 7.1px;
+    left: 35px;
+    cursor: pointer;
+    z-index: 10;
+}
+#oculto{
+    opacity: 0;
+}
+
+/*------------------- Parte das mensagens ----------------------------------*/
+
+#mensagens {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    z-index: 50;
+}
+
+.btn-close-message {
+    margin-left: .6em;
+}
+
+/*------------------- Loading ----------------------------------*/
+
+#div-loading{
+    display: flex;
+    /* background-color: #fb1616; */
+    width: 8rem; 
+    height: 8rem;
+    margin: auto;
+    font-size: 60px;
+}
+
+/*-------------- Responsivo -----------------------------*/
+
+@media (max-width: 447px){
+
+    .card{
+      margin: 1em 0.6em;
+    }
+    .cards{
+        display: flex;
+        justify-content:center;
+    }
+
+    section{
+        width: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+
+    }   
+}
+
+
+  
